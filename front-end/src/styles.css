@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+body { 
+    font-family: Roboto,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+    padding:0;
+    margin:0;
+    background: #fafafa;
+}
+
+.app-header {
+    padding: 15px;
+    background: #3f51b5; 
+    color:#fff;   
+    box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12)
+}
+
+.app-container {
+    padding-top:15px;
+    width:1000px;
+    margin:0 auto;
+}
+
+.mat-button, .mat-icon-button, .mat-stroked-button {
+    color: inherit;
+}

@@ -1,0 +1,52 @@
+<div>
+  <form [formGroup]="ingredientForm">
+      <mat-form-field>
+          <input type="text" required placeholder="Name" class="form-control" matInput formControlName="name">
+      </mat-form-field>
+      <mat-form-field>
+          <input type="number" required placeholder="Calories" class="form-control" matInput formControlName="calories">
+      </mat-form-field>
+      <mat-form-field>
+          <input type="number" placeholder="Protein" class="form-control" matInput formControlName="protein">
+      </mat-form-field>
+      <mat-form-field>
+          <input type="number" placeholder="Carbs" class="form-control" matInput formControlName="carbs">
+      </mat-form-field>
+      <mat-form-field>
+          <input type="number" placeholder="Sugar" class="form-control" matInput formControlName="sugar">
+      </mat-form-field>
+      <mat-form-field>
+          <input type="number" placeholder="Fiber" class="form-control" matInput formControlName="fiber">
+      </mat-form-field>
+      <mat-form-field>
+          <input type="number" placeholder="Fat" class="form-control" matInput formControlName="fat">
+      </mat-form-field>
+      <mat-form-field>
+          <input type="number" placeholder="Saturated" class="form-control" matInput formControlName="saturated">
+      </mat-form-field>
+      <mat-form-field>
+          <input type="number" placeholder="Monounsaturated fat" class="form-control" matInput formControlName="monounsaturated">
+      </mat-form-field>
+      <mat-form-field>
+          <input type="number" placeholder="Polyunsaturated fat" class="form-control" matInput formControlName="polyunsaturated">
+      </mat-form-field>
+      <mat-form-field>
+          <input type="number" placeholder="Monounsaturated fat" class="form-control" matInput formControlName="monounsaturated">
+      </mat-form-field>
+      <mat-form-field>
+          <input type="number" placeholder="Omega-3" class="form-control" matInput formControlName="omega3">
+      </mat-form-field>
+      <mat-form-field>
+          <input type="number" placeholder="Omega-6" class="form-control" matInput formControlName="omega6">
+      </mat-form-field>
+      <mat-form-field>
+          <input type="number" placeholder="Trans fat" class="form-control" matInput formControlName="transFat">
+      </mat-form-field>      
+      <input type="hidden" formControlName="Created_date">      
+      <input type="hidden" formControlName="__v">      
+  </form>
+    <div>
+    <button mat-raised-button color="primary" (click)="save()" [disabled]="!ingredientForm.valid" color="primary">save</button>
+    <button mat-raised-button (click)="goBack()">go back</button>
+    </div>
+</div>

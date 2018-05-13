@@ -1,0 +1,18 @@
+[
+    {
+        "name": "Tomatoe",
+        "id": 0,
+        "calories": 18,
+        "protein": 0.9,
+        "carbs": 3.9,
+        "sugar": 2.6,
+        "fiber": 1.2,
+        "fat": 0.2,
+        "saturated": 0.02,
+        "monounsaturated": 0.03,
+        "polyunsaturated": 0.08,
+        "omega3": 0,
+        "omega6": 0.08,
+        "transFat": 0
+    }
+]

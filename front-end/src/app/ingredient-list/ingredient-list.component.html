@@ -1,0 +1,13 @@
+<h2>Ingredients</h2>
+<mat-list>
+  <mat-list-item *ngFor="let ingredient of ingredients">
+      <a matLine  routerLink="/ingredient/{{ingredient._id}}">{{ingredient.name}}</a>
+    
+    <button mat-icon-button class="btn btn-danger" title="delete ingredient"
+      (click)="delete(ingredient)">
+      <mat-icon>delete</mat-icon>
+    </button>
+    <mat-divider></mat-divider>
+  </mat-list-item>
+</mat-list>
+<a mat-raised-button routerLink="/ingredient/-1" routerLinkActive="active">Add</a>

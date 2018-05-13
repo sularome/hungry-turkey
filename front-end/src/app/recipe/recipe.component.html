@@ -1,0 +1,25 @@
+<div>
+    <form [formGroup]="recipeForm">
+        <mat-form-field>
+            <input type="text" placeholder="Name" class="form-control" matInput formControlName="name">
+        </mat-form-field>
+        <h2>Ingredients</h2>
+        <div formArrayName="ingredients">
+            <div *ngFor="let ingredient of ingredients.controls" >
+            <mat-form-field>
+                <mat-select [formControl]="ingredient">
+                  <mat-option *ngFor="let ingredientOption of ingredientList | async" [value]="ingredientOption.id">
+                    {{ ingredientOption.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <button mat-button color="primary" (click)="removeIngredient(ingredient)">-</button>
+            </div>
+            <button mat-button color="primary" (click)="addIngredient()">+</button>
+        </div>
+        <div>
+          <button mat-button color="primary" (click)="save()">save</button>
+          <button mat-button color="primary" (click)="goBack()">go back</button>
+        </div>
+    </form>
+  </div>

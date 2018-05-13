@@ -1,0 +1,12 @@
+<h2>Meals</h2>
+<mat-list>
+    <mat-list-item *ngFor="let meal of meals">
+        <a matLine  routerLink="/meal/{{meal.id}}">{{meal.name}}</a>
+      
+      <button mat-icon-button class="btn btn-danger" title="delete meal"
+        (click)="delete(meal)">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+  </mat-list>
