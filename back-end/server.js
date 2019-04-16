@@ -3,6 +3,8 @@ var express = require('express'),
   port = process.env.PORT || 5005,
   mongoose = require('mongoose'),
   Ingredient = require('./api/models/ingredientListModel'), //created model loading here
+  Recipe = require('./api/models/recipeListModel'), //created model loading here
+  Unit = require('./api/models/unitListModel'), //created model loading here
   bodyParser = require('body-parser');
   
 // mongoose instance connection url connection
@@ -22,10 +24,14 @@ app.options("/*", function(req, res, next){
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-    res.send(200);
+    res.sendStatus(200);
 });
-var routes = require('./api/routes/ingredientListRoutes'); //importing route
-routes(app); //register the route
+var ingredientRoutes = require('./api/routes/ingredientListRoutes');
+ingredientRoutes(app);
+var recipeRoutes = require('./api/routes/recipeListRoutes');
+recipeRoutes(app);
+var unitRoutes = require('./api/routes/unitListRouter');
+unitRoutes(app);
 app.use(function(req, res) {
     res.status(404).send({url: req.originalUrl + ' not found'})
 });

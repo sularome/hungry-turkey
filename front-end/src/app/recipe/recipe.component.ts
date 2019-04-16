@@ -8,6 +8,8 @@ import { RecipeService } from '../recipe.service';
 import { IngredientService } from '../ingredient.service';
 import {Location} from '@angular/common';
 import { Ingredient } from '../ingredient/Ingredient';
+import { UnitService } from '../unit.service';
+import { Unit } from '../units/Unit';
 
 @Component({
   selector: 'app-recipe',
@@ -16,21 +18,24 @@ import { Ingredient } from '../ingredient/Ingredient';
 })
 export class RecipeComponent implements OnInit {
   recipeForm: FormGroup;
-  ingredientList: Observable<Ingredient[]>
+  ingredientList: Observable<Ingredient[]>;
+  unitsList: Observable<Unit[]>;
 
   constructor(    
     private route: ActivatedRoute,
     private ingredientService: IngredientService,
     private recipeService: RecipeService,
+    private unitsService: UnitService,
     private location: Location,
     private formBuilder: FormBuilder
   ) {
     this.recipeForm = this.formBuilder.group({
       name: "",
-      id: null,
+      _id: "-1",
       ingredients: this.formBuilder.array([])
     });
     this.ingredientList = this.ingredientService.getIngredients();
+    this.unitsList = this.unitsService.getUnits();
   }
 
   ngOnInit() {
@@ -38,19 +43,28 @@ export class RecipeComponent implements OnInit {
   }
 
   addIngredient() {
-    this.ingredients.push(new FormControl(null));
+    const ingredients: FormArray = this.recipeForm.controls.ingredients as FormArray;
+    ingredients.push(new FormGroup({
+      ingredient: new FormControl(``),
+      amount: new FormControl(0),
+      unit: new FormControl(``),
+    }));
   }
  
   getRecipe(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    if (id === -1) {
+    const id: string = this.route.snapshot.paramMap.get('id');
+    if (id === "-1") {
       return;
     }
     this.recipeService.getRecipe(id)
-      .subscribe(meal => {
-        this.recipeForm.patchValue({name: meal.name, id: meal.id});
-        const recipesFC = meal.ingredients.map(r => new FormControl(r));
-        this.recipeForm.setControl("ingredients", this.formBuilder.array(recipesFC));
+      .subscribe(recipe => {
+        this.recipeForm.patchValue({name: recipe.name, _id: recipe._id});
+        const recipesFC = recipe.ingredients.map(r => new FormGroup({
+            ingredient: new FormControl(r.ingredient),
+            amount: new FormControl(r.amount),
+            unit: new FormControl(r.unit),
+        }));
+        this.recipeForm.setControl("ingredients", new FormArray(recipesFC));
       });
   }
  
@@ -64,7 +78,7 @@ export class RecipeComponent implements OnInit {
  
  save(): void {
     const recipe = this.recipeForm.value;
-    if (recipe.id === null) {
+    if (recipe._id === "-1") {
       this.recipeService.addRecipe(recipe)
       .subscribe(() => this.goBack());
     } else {

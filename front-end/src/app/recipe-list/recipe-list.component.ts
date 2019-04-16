@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../recipe.service';
-import { Recipe } from '../recipe/Recipe';
+import { RecipeSummary } from '../recipe/RecipeSummary';
 
 @Component({
   selector: 'app-recipe-list',
@@ -9,7 +9,7 @@ import { Recipe } from '../recipe/Recipe';
 })
 export class RecipeListComponent implements OnInit {
 
-  recipes: Recipe[] = [];
+  recipes: RecipeSummary[] = [];
 
   constructor(private recipeService: RecipeService) { }
 
@@ -17,7 +17,7 @@ export class RecipeListComponent implements OnInit {
     this.getRecipes();
   }
 
-  delete(recipe: Recipe): void {
+  delete(recipe: RecipeSummary): void {
     this.recipes = this.recipes.filter(i => i !== recipe);
     this.recipeService.deleteRecipe(recipe).subscribe();
   }

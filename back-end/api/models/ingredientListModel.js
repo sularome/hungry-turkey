@@ -30,6 +30,10 @@ var IngredientSchema = new Schema({
     omega3: {         type: Number,         default: 0     },
     omega6: {         type: Number,         default: 0     },
     transFat: {         type: Number,         default: 0     },
+    transformations: [{
+        unit: {type: Schema.Types.ObjectId, ref: 'Unit'},
+        ratio: Number
+    }],
     deleted: Boolean
 });
 

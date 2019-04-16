@@ -19,6 +19,7 @@ import { MealComponent } from './meal/meal.component';
 import { MealListComponent } from './meal-list/meal-list.component';
 import { MealService } from './meal.service';
 import { RecipeService } from './recipe.service';
+import { UnitService } from './unit.service';
 import {
   MatAutocompleteModule,
   MatBadgeModule,
@@ -61,6 +62,7 @@ import 'core-js/es7/reflect';
 import 'zone.js/dist/zone';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
+import { UnitsComponent } from './units/units.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +75,8 @@ import { HttpModule } from '@angular/http';
     MealListComponent,
     RecipeListComponent,
     MealComponent,
-    MealListComponent
+    MealListComponent,
+    UnitsComponent
   ],
   imports: [
     BrowserModule,
@@ -121,7 +124,7 @@ import { HttpModule } from '@angular/http';
     MatTooltipModule,
     MatTreeModule,
   ],
-  providers: [IngredientService, MessageService, MealService, RecipeService],
+  providers: [IngredientService, MessageService, MealService, RecipeService, UnitService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

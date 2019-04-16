@@ -9,6 +9,7 @@ import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { MealListComponent } from './meal-list/meal-list.component';
 import { MealComponent } from './meal/meal.component';
 import { IngredientListComponent } from './ingredient-list/ingredient-list.component';
+import { UnitsComponent } from './units/units.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -18,7 +19,8 @@ const routes: Routes = [
 { path: 'recipe/:id', component: RecipeComponent },
 { path: 'recipe', component: RecipeListComponent },
 { path: 'meal/:id', component: MealComponent },
-{ path: 'meal', component: MealListComponent }
+{ path: 'meal', component: MealListComponent },
+{ path: 'units', component: UnitsComponent }
 ];
 
 @NgModule({

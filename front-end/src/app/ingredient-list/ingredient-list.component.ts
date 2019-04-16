@@ -14,7 +14,7 @@ export class IngredientListComponent implements OnInit {
   constructor(private ingredientService: IngredientService) { }
 
   ngOnInit() {
-    this.getHeroes();
+    this.getIngredients();
   }
 
   delete(ingredient: Ingredient): void {
@@ -22,7 +22,7 @@ export class IngredientListComponent implements OnInit {
     this.ingredientService.deleteIngredient(ingredient).subscribe();
   }
 
-  getHeroes(): void {
+  getIngredients(): void {
     this.ingredientService.getIngredients()
       .subscribe(ingredients => this.ingredients = ingredients);
   }

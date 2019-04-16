@@ -6,6 +6,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { MessageService } from './message.service';
 import { Recipe } from './recipe/Recipe';
+import { RecipeSummary } from './recipe/RecipeSummary';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -21,8 +22,8 @@ export class RecipeService {
     private messageService: MessageService) { }
 
   /** GET recipes from the server */
-  getRecipes (): Observable<Recipe[]> {
-    return this.http.get<Recipe[]>(this.recipesUrl)
+  getRecipes (): Observable<RecipeSummary[]> {
+    return this.http.get<RecipeSummary[]>(this.recipesUrl)
       .pipe(
         tap(recipes => this.log(`fetched recipes`)),
         catchError(this.handleError('getRecipes', []))
@@ -44,7 +45,7 @@ export class RecipeService {
   }
 
   /** GET recipe by id. Will 404 if id not found */
-  getRecipe(id: number): Observable<Recipe> {
+  getRecipe(id: string): Observable<Recipe> {
     const url = `${this.recipesUrl}/${id}`;
     return this.http.get<Recipe>(url).pipe(
       tap(_ => this.log(`fetched recipe id=${id}`)),
@@ -53,14 +54,14 @@ export class RecipeService {
   }
 
   /* GET recipes whose name contains search term */
-  searchRecipes(term: string): Observable<Recipe[]> {
+  searchRecipes(term: string): Observable<RecipeSummary[]> {
     if (!term.trim()) {
       // if not search term, return empty recipe array.
       return of([]);
     }
-    return this.http.get<Recipe[]>(`api/recipes/?name=${term}`).pipe(
+    return this.http.get<RecipeSummary[]>(`api/recipes/?name=${term}`).pipe(
       tap(_ => this.log(`found recipes matching "${term}"`)),
-      catchError(this.handleError<Recipe[]>('searchRecipees', []))
+      catchError(this.handleError<RecipeSummary[]>('searchRecipees', []))
     );
   }
 
@@ -68,15 +69,17 @@ export class RecipeService {
 
   /** POST: add a new recipe to the server */
   addRecipe (recipe: Recipe): Observable<Recipe> {
-    return this.http.post<Recipe>(this.recipesUrl, recipe, httpOptions).pipe(
-      tap((recipe: Recipe) => this.log(`added recipe w/ id=${recipe.id}`)),
+    const cloneRecipe = JSON.parse(JSON.stringify(recipe));
+    delete cloneRecipe._id;
+    return this.http.post<Recipe>(this.recipesUrl, cloneRecipe, httpOptions).pipe(
+      tap((recipe: Recipe) => this.log(`added recipe w/ id=${recipe._id}`)),
       catchError(this.handleError<Recipe>('addRecipe'))
     );
   }
 
   /** DELETE: delete the recipe from the server */
   deleteRecipe (recipe: Recipe | number): Observable<Recipe> {
-    const id = typeof recipe === 'number' ? recipe : recipe.id;
+    const id = typeof recipe === 'number' ? recipe : recipe._id;
     const url = `${this.recipesUrl}/${id}`;
 
     return this.http.delete<Recipe>(url, httpOptions).pipe(
@@ -87,8 +90,10 @@ export class RecipeService {
 
   /** PUT: update the recipe on the server */
   updateRecipe (recipe: Recipe): Observable<any> {
-    return this.http.put(this.recipesUrl, recipe, httpOptions).pipe(
-      tap(_ => this.log(`updated recipe id=${recipe.id}`)),
+    const id = typeof recipe === 'number' ? recipe : recipe._id;
+    const url = `${this.recipesUrl}/${id}`;
+    return this.http.put(url, recipe, httpOptions).pipe(
+      tap(_ => this.log(`updated recipe id=${recipe._id}`)),
       catchError(this.handleError<any>('updateRecipe'))
     );
   }

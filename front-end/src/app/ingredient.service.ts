@@ -68,7 +68,9 @@ export class IngredientService {
 
   /** POST: add a new ingredient to the server */
   addIngredient (ingredient: Ingredient): Observable<Ingredient> {
-    return this.http.post<Ingredient>(this.ingredientsUrl, ingredient, httpOptions).pipe(
+    const ingredientRecipe = JSON.parse(JSON.stringify(ingredient));
+    delete ingredientRecipe._id;
+    return this.http.post<Ingredient>(this.ingredientsUrl, ingredientRecipe, httpOptions).pipe(
       tap((ingredient: Ingredient) => this.log(`added ingredient w/ id=${ingredient._id}`)),
       catchError(this.handleError<Ingredient>('addIngredient'))
     );

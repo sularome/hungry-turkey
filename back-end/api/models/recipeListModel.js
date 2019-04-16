@@ -13,7 +13,12 @@ var RecipeSchema = new Schema({
         default: Date.now
     },
     ingredients:[
-        {type: Schema.Types.ObjectId, ref: 'Ingredient'}
+        {
+            ingredient: {type: Schema.Types.ObjectId, ref: 'Ingredient'},
+            unit: {type: Schema.Types.ObjectId, ref: 'Unit'},
+            amount: Number
+        },
+        
     ],
     deleted: Boolean
 });

@@ -49,15 +49,15 @@ export class InMemoryDataService implements InMemoryDbService {
     //   "transFat": 0 }
     // ];
 
-    const recipes: Recipe[] = [
-      {id: 0, name: 'Twaróg półtłusty', ingredients: [{id: 14, amount: 250}]},
-      {id: 1, name: 'Twarożek wiejski', ingredients: [{id: 13, amount: 130}]}
-    ];
+    // const recipes: Recipe[] = [
+    //   {id: 0, name: 'Twaróg półtłusty', ingredients: [{id: 14, amount: 250}]},
+    //   {id: 1, name: 'Twarożek wiejski', ingredients: [{id: 13, amount: 130}]}
+    // ];
 
     const meals: Meal[] = [
       {id: 0, recipes: [0, 1], name: "Dzien twarozkowy"}
     ];
 
-    return {recipes, meals};
+    return { meals};
   }
 }

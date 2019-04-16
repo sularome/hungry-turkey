@@ -1,0 +1,21 @@
+<h1>Units</h1>
+
+  <mat-list>
+      <mat-list-item *ngFor="let unit of unitsList">
+        <div matLine>{{unit.name}}</div>
+        <button mat-icon-button class="btn btn-danger" title="delete unit"
+          (click)="delete(unit)">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-list>
+  <div layout="row" flex *ngIf="displayEmptyUnit">
+      <mat-form-field class="example-full-width">
+        <input matInput type="text" placeholder="Unit name" [(ngModel)]="newUnitName">
+      </mat-form-field>
+      <div>
+        <button mat-raised-button (click)="addNewUnit()" [disabled]="!isValidNewUnit()">Add</button>
+      </div>
+  </div> 
+  <a mat-raised-button (click)="toggleEmptyUnit()" *ngIf="!displayEmptyUnit">Add</a>

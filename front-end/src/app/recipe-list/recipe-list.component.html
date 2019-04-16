@@ -1,8 +1,8 @@
 <h2>Recipes</h2>
 <mat-list>
     <mat-list-item *ngFor="let recipe of recipes">
-        <a matLine  routerLink="/recipe/{{recipe.id}}">{{recipe.name}}</a>
-      
+        <a matLine  routerLink="/recipe/{{recipe._id}}">{{recipe.name}}</a>
+      <i>{{recipe.calories}} kcal, protein: {{recipe.protein}}, fat: {{recipe.fat}}</i>      
       <button mat-icon-button class="btn btn-danger" title="delete recipe"
         (click)="delete(recipe)">
         <mat-icon>delete</mat-icon>
