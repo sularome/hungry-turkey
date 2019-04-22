@@ -45,8 +45,8 @@ export class RecipeComponent implements OnInit {
   addIngredient() {
     const ingredients: FormArray = this.recipeForm.controls.ingredients as FormArray;
     ingredients.push(new FormGroup({
-      ingredient: new FormControl(``),
-      amount: new FormControl(0),
+      ingredient: new FormControl(`-1`),
+      amount: new FormControl(1),
       unit: new FormControl(``),
     }));
   }

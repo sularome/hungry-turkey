@@ -17,13 +17,11 @@
                 <mat-form-field>
                   <input matInput type="text" placeholder="Amount" formControlName="amount">
                 </mat-form-field>
-                <mat-form-field>
-                  <mat-select  formControlName="unit">
-                    <mat-option *ngFor="let unitOption of unitsList | async" [value]="unitOption._id">
-                      {{ unitOption.name }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
+                
+                <app-ingredient-units 
+                  [ingredientId]="ingredient.get('ingredient').value"
+                  formControlName="unit"
+                ></app-ingredient-units>
               </div>
               <button mat-button color="primary" (click)="removeIngredient(ingredient)">-</button>
             </div>

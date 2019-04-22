@@ -63,6 +63,7 @@ import 'zone.js/dist/zone';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 import { UnitsComponent } from './units/units.component';
+import { IngredientUnitsComponent } from './ingredient/ingredient-units/ingredient-units.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { UnitsComponent } from './units/units.component';
     RecipeListComponent,
     MealComponent,
     MealListComponent,
-    UnitsComponent
+    UnitsComponent,
+    IngredientUnitsComponent
   ],
   imports: [
     BrowserModule,

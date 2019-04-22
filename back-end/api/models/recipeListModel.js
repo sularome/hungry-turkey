@@ -15,7 +15,7 @@ var RecipeSchema = new Schema({
     ingredients:[
         {
             ingredient: {type: Schema.Types.ObjectId, ref: 'Ingredient'},
-            unit: {type: Schema.Types.ObjectId, ref: 'Unit'},
+            unit: String,
             amount: Number
         },
         

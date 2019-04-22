@@ -31,7 +31,7 @@ var IngredientSchema = new Schema({
     omega6: {         type: Number,         default: 0     },
     transFat: {         type: Number,         default: 0     },
     transformations: [{
-        unit: {type: Schema.Types.ObjectId, ref: 'Unit'},
+        unit: String,
         ratio: Number
     }],
     deleted: Boolean

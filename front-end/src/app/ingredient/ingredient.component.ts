@@ -5,8 +5,6 @@ import { IngredientService } from '../ingredient.service';
 import {Location} from '@angular/common';
 import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Unit } from '../units/Unit';
-import { UnitService } from '../unit.service';
 
 @Component({
   selector: 'app-ingredient',
@@ -15,16 +13,13 @@ import { UnitService } from '../unit.service';
 })
 export class IngredientComponent implements OnInit {
   ingredientForm: FormGroup;
-  unitsList: Observable<Unit[]>;
 
   constructor(    
     private route: ActivatedRoute,
     private ingredientService: IngredientService,
     private location: Location,
-    private unitsService: UnitService,
     private formBuilder: FormBuilder
   ) {
-    this.unitsList = this.unitsService.getUnits();
     this.ingredientForm = this.formBuilder.group({
       name: new FormControl(""),
       _id: new FormControl("-1"),

@@ -48,16 +48,12 @@
       <div formArrayName="transformations">
           <div *ngFor="let transformation of ingredientForm.controls.transformations.controls; index as index;" >
             <div [formGroup]="transformation">
-              <mat-form-field>
-                <input matInput type="text" placeholder="Ratio" formControlName="ratio">
-              </mat-form-field>
-              <mat-form-field>
-                <mat-select  formControlName="unit">
-                  <mat-option *ngFor="let unitOption of unitsList | async" [value]="unitOption._id">
-                    {{ unitOption.name }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
+                <mat-form-field>
+                  <input matInput type="text" placeholder="Ratio" formControlName="ratio">
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput type="text" placeholder="Unit" formControlName="unit">
+                </mat-form-field>
             </div>
             <button mat-button color="primary" (click)="removeTransformation(index)">-</button>
           </div>

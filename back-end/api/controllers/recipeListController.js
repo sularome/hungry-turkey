@@ -54,7 +54,7 @@ exports.read_a_recipe = function(req, res) {
       return {
         ingredient: ingredient.ingredient ? ingredient.ingredient._id : null,
         amount: ingredient.amount,
-        unit: ingredient.unit ? ingredient.unit._id : null
+        unit: ingredient.unit
       }
     });
     res.json(recipe);
